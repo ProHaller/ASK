@@ -4,6 +4,8 @@
 // When compiling natively:
 #[cfg(not(target_arch = "wasm32"))]
 fn main() -> eframe::Result {
+    use ask::{GraphApp, parse_lua};
+
     env_logger::init(); // Log to stderr (if you run with `RUST_LOG=debug`).
 
     let native_options = eframe::NativeOptions {
@@ -17,10 +19,13 @@ fn main() -> eframe::Result {
             ),
         ..Default::default()
     };
+
+    let parsed_skills = parse_lua().expect("Failed to parse lua");
+    log::info!("Loaded {parsed_skills:?}");
     eframe::run_native(
-        "eframe template",
+        "ASK Graph Viewer",
         native_options,
-        Box::new(|cc| Ok(Box::new(eframe_template::TemplateApp::new(cc)))),
+        Box::new(|cc| Ok(Box::new(GraphApp::new(cc, Some(&parsed_skills))))),
     )
 }
 

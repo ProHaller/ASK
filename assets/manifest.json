@@ -1,6 +1,6 @@
 {
-  "name": "egui Template PWA",
-  "short_name": "egui-template-pwa",
+  "name": "ASK Graph Viewer",
+  "short_name": "ask-graph-viewer",
   "icons": [
     {
       "src": "./assets/icon-256.png",
